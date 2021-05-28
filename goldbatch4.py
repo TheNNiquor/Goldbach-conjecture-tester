@@ -29,19 +29,19 @@ def even(n: int) -> numpy.ndarray:    #Generates even numbers
 
 @numba.jit(nopython = True)
 def checker(evens, primes, k):   #Checks for the existence of a pair of Goldbach
-    lista = []                #primes for each even
+    lista = []                   #primes for each even
     for i in numba.prange(0,k):
-        half = evens[i]/2
+        half = evens[i]/2        #We start from middle road
 
             
-        half_index = numpy.searchsorted(primes,half)
-        
+        half_index = numpy.searchsorted(primes,half)  #Searches the index for 
+                                                      #prime nearest the half
         for j in primes[half_index:len(primes)]:
             
             m = evens[i]-j 
             prime_index = numpy.searchsorted(primes,m, side = 'left')
             
-            if (primes[prime_index] == m) and (evens[i]-j-m == 0):
+            if (primes[prime_index] == m) and (evens[i]-j-m == 0): #Second condition: we don't assume the conjeture is true
                 lista.append([m,j,evens[i]])
             
     return lista
