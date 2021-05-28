@@ -9,6 +9,7 @@ import numpy
 import timeit
 import datetime 
 import numba
+import pickle
 
 def sieve (n: int) -> numpy.ndarray:    #Erathostenes sieve for prime numbers
     primes = numpy.full(n, True)
@@ -61,13 +62,16 @@ if __name__ == "__main__":
     print(evens)
     k = len(evens)
     
-    duplas = checker(evens, primes,k)
+    triplets = checker(evens, primes,k)
     
     
     
     timestop = timeit.default_timer()
     timedelta = (timestop - timestart)
     print(f"Time Elapsed: {datetime.timedelta(seconds = timedelta)}")
+    
+    with open('goldbach_list.mat', 'wb') as f:
+        pickle.dump(triplets, f)
 
 else:
     pass
