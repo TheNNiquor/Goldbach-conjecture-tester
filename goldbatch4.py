@@ -41,7 +41,7 @@ def checker(evens, primes, k):   #Checks for the existence of a pair of Goldbach
             m = evens[i]-j 
             prime_index = numpy.searchsorted(primes,m, side = 'left')
             
-            if (primes[prime_index] == m):
+            if (primes[prime_index] == m) and (evens[i]-j-m == 0):
                 lista.append([m,j,evens[i]])
             
     return lista
@@ -49,7 +49,7 @@ def checker(evens, primes, k):   #Checks for the existence of a pair of Goldbach
 
 if __name__ == "__main__":
     
-    n = 100000
+    n = 10000
     timestart = timeit.default_timer()
     primes = sieve(n)
     print(primes)
